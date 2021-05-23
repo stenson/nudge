@@ -1,9 +1,9 @@
 {
 	"name": "nudge",
-	"displayName": "nudge numbers i.e. in-/de-crement and save",
-	"description": "increment numbers and save immediately",
+	"displayName": "nudge",
+	"description": "nudge numbers and save, i.e. in-/de-crement and save to disk immediately",
 	"icon": "design/renders/logo_logo.png",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "robstenson",
 	"repository": {
 		"type": "git",
