@@ -1,0 +1,42 @@
+{
+	"name": "incandsave",
+	"displayName": "increment and save",
+	"description": "increment numbers and save immediately",
+	"version": "0.0.1",
+	"publisher": "stenson",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stenson/incandsave"
+	},
+	"bugs": {
+		"url": "https://github.com/stenson/incandsave/issues"
+	},
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:python"
+	],
+	"contributes": {
+        "commands": [
+            {
+                "command": "incandsave.incrementSelection",
+                "title": "Increment Selection"
+			}
+        ]
+    },
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "tslint -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"typescript": "^3.5.1",
+		"@types/vscode": "^1.32.0"
+	}
+}
