@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 export function activate({ subscriptions }: vscode.ExtensionContext) {
-	subscriptions.push(vscode.commands.registerCommand('incandsave.incrementSelection', function(json) {
+	subscriptions.push(vscode.commands.registerCommand('nudge.incrementSelection', function(json:any) {
 		incrementSelection(json ? (json["increment"] || 10) : 10, json ? (json["dimension"] || "x") : "x");
 	}));
 }
@@ -24,14 +24,16 @@ const regexes = [
 	[
 		"float",
 		/[\-0-9]+?\.[0-9]+/,
-		(s:string) => [Math.round(parseFloat(s)*1000)],
-		(ns:Array<number>) => ns.map((n:number) => (n/1000).toFixed(2)),
+		(s:string) => [parseFloat(s)],
+		(n:number, inc:number) => n + inc/100,
+		(ns:Array<number>) => ns.map((n:number) => (n).toFixed(2)),
 		(s:string) => `${s}`
 	],
 	[
 		"integer",
 		/[\-0-9]+/,
 		(s:string) => [parseInt(s)],
+		(n:number, inc:number) => n + inc,
 		(ns:Array<number>) => ns,
 		(s:string) => `${s}`
 	],
@@ -47,18 +49,21 @@ function incrementSelection(increment: number, dimension: string): void {
 				let name = <string>lookup[0];
 				let reg = <RegExp>lookup[1];
 				let cb = <Function>lookup[2];
-				let castcb = <Function>lookup[3];
-				let wrapcb = <Function>lookup[4];
+				let inccb = <Function>lookup[3];
+				let castcb = <Function>lookup[4];
+				let wrapcb = <Function>lookup[5];
 				let m = ated.getWordRangeAtPosition(n, reg);
 				if (m) {
 					//console.log("--------------", name);
 					let ns:Array<number> = cb(ated.getText(m));
+					//console.log(">>>>>>>>>>>", ns);
+					ns = ns.map((n:number) => inccb(n, increment));
 					//.map((n:number) => n + increment);
-					if (dimension == "x") {
-						ns[0] += increment;
-					} else if (dimension == "y") {
-						ns[ns.length-1] += increment;
-					}
+					// if (dimension == "x") {
+					// 	ns[0] += increment;
+					// } else if (dimension == "y") {
+					// 	ns[ns.length-1] += increment;
+					// }
 					let ns_str:string = wrapcb(castcb(ns).join(", "));
 					//console.log(ns_str);
 					ate.edit(editBuilder => {

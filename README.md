@@ -1,42 +1,52 @@
 Experimental VSCode extension for quickly incrementing numeric values and immediately saving the source-file (in situations where a sourcefile is being monitored for changes).
 
 ```
-npm install -g vsce
-vsce package
-code --install-extension path-to-vsix.vsix
-```
-
-```
     {
         "key": "alt+down",
-        "command": "incandsave.incrementSelection",
-        "when": "editorTextFocus && editorHasSelection",
+        "command": "nudge.incrementSelection",
+        "when": "editorTextFocus",
         "args": {
             "increment": -10
         }
     },
     {
         "key": "alt+up",
-        "command": "incandsave.incrementSelection",
-        "when": "editorTextFocus && editorHasSelection",
+        "command": "nudge.incrementSelection",
+        "when": "editorTextFocus",
         "args": {
             "increment": 10
         }
     },
     {
         "key": "cmd+alt+down",
-        "command": "incandsave.incrementSelection",
-        "when": "editorTextFocus && editorHasSelection",
+        "command": "nudge.incrementSelection",
+        "when": "editorTextFocus",
         "args": {
             "increment": -1
         }
     },
     {
         "key": "cmd+alt+up",
-        "command": "incandsave.incrementSelection",
-        "when": "editorTextFocus && editorHasSelection",
+        "command": "nudge.incrementSelection",
+        "when": "editorTextFocus",
         "args": {
             "increment": 1
+        }
+    },
+    {
+        "key": "shift+alt+down",
+        "command": "nudge.incrementSelection",
+        "when": "editorTextFocus",
+        "args": {
+            "increment": -100
+        }
+    },
+    {
+        "key": "shift+alt+up",
+        "command": "nudge.incrementSelection",
+        "when": "editorTextFocus",
+        "args": {
+            "increment": 100
         }
     },
 ```

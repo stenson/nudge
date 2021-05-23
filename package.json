@@ -1,15 +1,15 @@
 {
-	"name": "incandsave",
+	"name": "nudge",
 	"displayName": "increment and save",
 	"description": "increment numbers and save immediately",
 	"version": "0.0.1",
 	"publisher": "stenson",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stenson/incandsave"
+		"url": "https://github.com/stenson/nudge"
 	},
 	"bugs": {
-		"url": "https://github.com/stenson/incandsave/issues"
+		"url": "https://github.com/stenson/nudge/issues"
 	},
 	"engines": {
 		"vscode": "^1.32.0"
@@ -21,13 +21,13 @@
 		"onLanguage:python"
 	],
 	"contributes": {
-        "commands": [
-            {
-                "command": "incandsave.incrementSelection",
-                "title": "Increment Selection"
+		"commands": [
+			{
+				"command": "nudge.incrementSelection",
+				"title": "Nudge Selection"
 			}
-        ]
-    },
+		]
+	},
 	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -36,7 +36,7 @@
 		"watch": "tsc -watch -p ./"
 	},
 	"devDependencies": {
-		"typescript": "^3.5.1",
-		"@types/vscode": "^1.32.0"
+		"@types/vscode": "^1.32.0",
+		"typescript": "^3.5.1"
 	}
 }
