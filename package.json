@@ -1,9 +1,10 @@
 {
 	"name": "nudge",
-	"displayName": "increment and save",
+	"displayName": "nudge numbers i.e. in-/de-crement and save",
 	"description": "increment numbers and save immediately",
+	"icon": "design/renders/logo_logo.png",
 	"version": "0.0.1",
-	"publisher": "stenson",
+	"publisher": "robstenson",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/stenson/nudge"
