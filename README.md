@@ -1,3 +1,5 @@
+A VSCode extension: https://marketplace.visualstudio.com/items?itemName=robstenson.nudge
+
 Experimental VSCode extension for quickly incrementing numeric values and immediately saving the source-file (in situations where a sourcefile is being monitored for changes).
 
 ```
