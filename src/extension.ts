@@ -37,6 +37,14 @@ const regexes = [
 		(ns:Array<number>) => ns,
 		(s:string) => `${s}`
 	],
+	[
+		"char",
+		/[A-Za-z]{1}/,
+		(s:string) => [s.charCodeAt(0)],
+		(n:number, inc:number) => n + inc,
+		(ns:Array<number>) => ns.map((n:number) => String.fromCharCode(n)),
+		(s:string) => `${s}`
+	]
 ]
 
 function incrementSelection(increment: number, dimension: string): void {
