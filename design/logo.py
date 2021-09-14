@@ -1,15 +1,13 @@
 from coldtype import *
 
-fnt = Font.Cacheable("~/Type/fonts/fonts/IrregardlessVariable.ttf")
-
-fnt2 = Font.Cacheable("~/Type/fonts/fonts/_wdths/CoFoPeshkaV0.4_Variable.ttf")
+fnt = Font.Find("IrregardlessV")
+fnt2 = Font.Find("CoFoPeshkaV0.4_Variable")
 
 @renderable((256, 256))
 def logo(_r):
     r = Rect(1080, 1080)
-    return (DPS([
-        (DP()
-            .oval(r.inset(50))
+    return (PS([
+        (P().oval(r.inset(50))
             .f(hsl(0.4, 0.6, 0.5))),
         (StSt("Nudge".upper(), fnt, 550, wght=0.75, slnt=1, ss01=1)
             .align(r)

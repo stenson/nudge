@@ -1,6 +1,6 @@
 from coldtype import *
 
-fnt = Font.Cacheable("~/Type/fonts/fonts/IrregardlessVariable.ttf")
+fnt = Font.Find("IrregardlessV")
 
 @renderable((128*2, 128*2))
 def logo(r):
