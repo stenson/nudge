@@ -4,6 +4,29 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 	subscriptions.push(vscode.commands.registerCommand('nudge.incrementSelection', function(json:any) {
 		incrementSelection(json ? (json["increment"] || 10) : 10, json ? (json["dimension"] || "x") : "x");
 	}));
+
+	let saving = false;
+	let savingInterval = 500;
+	let saver = -1;
+
+	subscriptions.push(vscode.commands.registerCommand('nudge.toggleAutoSaving', function(json:any) {
+		if (saving === false) {
+			saving = true;
+			savingInterval = json ? (json["interval"] || 500) : 500;
+		} else {
+			saving = false;
+		}
+	}));
+
+	vscode.workspace.onDidChangeTextDocument(function(e) {
+		if (saving) {
+			let ate = vscode.window.activeTextEditor;
+			if (ate) {
+				clearTimeout(saver);
+				saver = setTimeout(() => ate?.document.save(), savingInterval);
+			}
+		}
+	});
 }
 
 const regexes = [
