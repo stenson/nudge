@@ -29,21 +29,37 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 	});
 }
 
+const ARROWS = "↖↑↗→↘↓↙←";
+
+function arrowIncrement(n:number, inc:number) {
+	if (inc == 1 || inc == -1) {
+		let nx = n + inc;
+		if (nx >= ARROWS.length) {
+			return 0;
+		} else if (nx < 0) {
+			return ARROWS.length - 1;
+		} else {
+			return nx;
+		}
+	} else if (inc == 100 || inc == -100) {
+		let a = ARROWS[n];
+		let na = "";
+		switch (a) {
+			case "←": na = "→"; break;
+			case "→": na = "←"; break;
+			case "↑": na = "↓"; break;
+			case "↓": na = "↑"; break;
+			case "↖": na = "↘"; break;
+			case "↘": na = "↖"; break;
+			case "↗": na = "↙"; break;
+			case "↙": na = "↗"; break;
+		}
+		return ARROWS.indexOf(na);
+	}
+	return 0;
+}
+
 const regexes = [
-	// [
-	// 	"floatpos",
-	// 	/\([\-0-9]+?\.[0-9]+,\s?[\-0-9]+?\.[0-9]+\)/,
-	// 	(s:string) => s.slice(1, -1).split(",").map((x:string) => Math.round(parseFloat(x)*1000)),
-	// 	(ns:Array<number>) => ns.map((n:number) => (n/1000).toFixed(2)),
-	// 	(s:string) => `(${s})`
-	// ],
-	// [
-	// 	"intpos",
-	// 	/\([\-0-9]+,\s?[\-0-9]+\)/,
-	// 	(s:string) => s.slice(1, -1).split(",").map((x:string) => parseInt(x)),
-	// 	(ns:Array<number>) => ns,
-	// 	(s:string) => `(${s})`
-	// ],
 	[
 		"float",
 		/[\-0-9]+?\.[0-9]+/,
@@ -67,7 +83,15 @@ const regexes = [
 		(n:number, inc:number) => n + inc,
 		(ns:Array<number>) => ns.map((n:number) => String.fromCharCode(n)),
 		(s:string) => `${s}`
-	]
+	],
+	[
+		"arrows",
+		/[↖↑↗→↘↓↙←]{1}/,
+		(s:string) => [ARROWS.indexOf(s)],
+		arrowIncrement,
+		(ns:Array<number>) => ns.map((n:number) => ARROWS[n]),
+		(s:string) => `${s}`
+	],
 ]
 
 function incrementSelection(increment: number, dimension: string): void {
@@ -86,8 +110,9 @@ function incrementSelection(increment: number, dimension: string): void {
 				let m = ated.getWordRangeAtPosition(n, reg);
 				if (m) {
 					//console.log("--------------", name);
+					//console.log("====", ated.getText(m));
 					let ns:Array<number> = cb(ated.getText(m));
-					//console.log(">>>>>>>>>>>", ns);
+					//console.log(">>>>>>>>>>>", ns, "<<<<");
 					ns = ns.map((n:number) => inccb(n, increment));
 					//.map((n:number) => n + increment);
 					// if (dimension == "x") {

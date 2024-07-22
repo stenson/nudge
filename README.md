@@ -50,3 +50,14 @@ Experimental VSCode extension for quickly incrementing numeric values and immedi
         }
     },
 ```
+
+# Development
+
+```bash
+npm install
+npm run compile
+```
+
+`F5` to run
+
+https://code.visualstudio.com/api/working-with-extensions/publishing-extension

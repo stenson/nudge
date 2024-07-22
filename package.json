@@ -3,7 +3,7 @@
 	"displayName": "nudge",
 	"description": "nudge numbers and save, i.e. in-/de-crement and save to disk immediately",
 	"icon": "design/renders/logo_logo.png",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"publisher": "robstenson",
 	"repository": {
 		"type": "git",
