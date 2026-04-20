@@ -59,7 +59,28 @@ function arrowIncrement(n:number, inc:number) {
 	return 0;
 }
 
+const POINTS = [".pc", ".pn", ".pne", ".pe", ".pse", ".ps", ".psw", ".pw", ".pnw"]
+
+function pointsIncrement(n:number, inc:number) {
+	let nx = n + Math.sign(inc);
+	if (nx >= POINTS.length) {
+		return 0;
+	} else if (nx < 0) {
+		return POINTS.length - 1;
+	} else {
+		return nx;
+	}
+}
+
 const regexes = [
+	[
+		"points",
+		/\.p([cnsew]{1,2})/,
+		(s:string) => [POINTS.indexOf(s)],
+		pointsIncrement,
+		(ns:Array<number>) => ns.map((n:number) => POINTS[n]),
+		(s:string) => `${s}`
+	],
 	[
 		"float",
 		/[\-0-9]+?\.[0-9]+/,
